@@ -1,5 +1,8 @@
 require 'test/unit'
 
+# Require pretty print now so it does NOT get analyzed if a test fails
+require 'pp'
+
 class RreaderTest < Test::Unit::TestCase
   def setup
     # NOTE: This is late loaded as to not have test/unit requires overwritten by our custom requires    
@@ -27,12 +30,12 @@ class RreaderTest < Test::Unit::TestCase
   end
   
   def test_object_file_mappings    
-    assert_equal 2, OBJECT_REFERENCE_MAPPINGS["ClassOne"].size
+    assert_equal 5, OBJECT_REFERENCE_MAPPINGS["ClassOne"].size
     assert_equal "./class_two.rb", OBJECT_REFERENCE_MAPPINGS["ClassOne"].first.file
   end
   
   def test_references
-    assert_equal 2, Rreader.references.first.last.count
+    assert_equal 5, Rreader.references.first.last.count
     assert_equal "ClassTwo", Rreader.references.last.first
   end
   
